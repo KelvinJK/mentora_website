@@ -1,8 +1,10 @@
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TeamGrid from '@/components/TeamGrid';
 import PartnershipForm from '@/components/PartnershipForm';
-import { Bot, BookOpen, Layers, Users, TrendingUp, Lightbulb, CheckCircle2 } from 'lucide-react';
+import CountUp from '@/components/CountUp';
+import { Bot, BookOpen, Layers } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -25,12 +27,14 @@ export default function Home() {
             Mentora provides AI-driven lesson plans, automated assessments, and continuous professional development to help teachers focus on what matters most—their students.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="px-8 py-4 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-600 text-white font-bold tracking-wide hover:shadow-glow transition-all transform hover:-translate-y-1">
+            <a
+              href="https://mentoratanzania.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-600 text-white font-bold tracking-wide hover:shadow-glow transition-all transform hover:-translate-y-1 inline-block"
+            >
               TRY FOR FREE
-            </button>
-            <button className="px-8 py-4 rounded-full bg-white text-slate-700 border border-slate-200 font-bold tracking-wide hover:bg-slate-50 hover:border-slate-300 transition-all">
-              LEARN MORE
-            </button>
+            </a>
           </div>
 
           {/* Dashboard Preview / Image Placeholder */}
@@ -46,16 +50,22 @@ export default function Home() {
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100">
-              <h3 className="text-4xl md:text-5xl font-bold text-fuchsia-600 mb-2">400+</h3>
+            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
+              <h3 className="text-4xl md:text-5xl font-bold text-fuchsia-600 mb-2">
+                <CountUp end={400} suffix="+" />
+              </h3>
               <p className="text-slate-600 font-medium">Partner Schools</p>
             </div>
-            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100">
-              <h3 className="text-4xl md:text-5xl font-bold text-violet-600 mb-2">7</h3>
+            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
+              <h3 className="text-4xl md:text-5xl font-bold text-violet-600 mb-2">
+                <CountUp end={7} duration={1500} />
+              </h3>
               <p className="text-slate-600 font-medium">Regions Covered</p>
             </div>
-            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100">
-              <h3 className="text-4xl md:text-5xl font-bold text-fuchsia-600 mb-2">50,000+</h3>
+            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
+              <h3 className="text-4xl md:text-5xl font-bold text-fuchsia-600 mb-2">
+                <CountUp end={50000} suffix="+" duration={2500} />
+              </h3>
               <p className="text-slate-600 font-medium">Students Impacted</p>
             </div>
           </div>
@@ -63,7 +73,7 @@ export default function Home() {
       </section>
 
       {/* Why Mentora? / Features */}
-      <section id="about" className="py-24 bg-white relative">
+      <section id="features" className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold font-display text-slate-800 mb-4">Why Mentora?</h2>
@@ -131,18 +141,41 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="group cursor-pointer">
-                <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden mb-6 relative">
-                  <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors"></div>
-                  <div className="absolute bottom-4 left-4 bg-white px-3 py-1 rounded-full text-xs font-bold text-fuchsia-600 shadow-sm">CASE STUDY</div>
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-fuchsia-600 transition-colors">How St. Mary&apos;s Increased Engagement by 40%</h3>
-                <div className="flex items-center text-sm font-medium text-slate-500 group-hover:text-fuchsia-500 transition-colors">
-                  READ MORE <span className="ml-2">→</span>
-                </div>
+            <div className="group cursor-pointer">
+              <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden mb-6 relative">
+                <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors"></div>
+                <div className="absolute bottom-4 left-4 bg-white px-3 py-1 rounded-full text-xs font-bold text-fuchsia-600 shadow-sm">CASE STUDY</div>
               </div>
-            ))}
+              <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-fuchsia-600 transition-colors">Digital Transformation in Rural Schools</h3>
+              <p className="text-slate-500 text-sm mb-3">How AI tools bridge the resource gap in underserved regions.</p>
+              <div className="flex items-center text-sm font-medium text-slate-500 group-hover:text-fuchsia-500 transition-colors">
+                READ MORE <span className="ml-2">→</span>
+              </div>
+            </div>
+
+            <div className="group cursor-pointer">
+              <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden mb-6 relative">
+                <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors"></div>
+                <div className="absolute bottom-4 left-4 bg-white px-3 py-1 rounded-full text-xs font-bold text-violet-600 shadow-sm">PEDAGOGY</div>
+              </div>
+              <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-violet-600 transition-colors">Implementing CBC Effectively</h3>
+              <p className="text-slate-500 text-sm mb-3">A practical guide for teachers adapting to the new curriculum.</p>
+              <div className="flex items-center text-sm font-medium text-slate-500 group-hover:text-violet-500 transition-colors">
+                READ MORE <span className="ml-2">→</span>
+              </div>
+            </div>
+
+            <div className="group cursor-pointer">
+              <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden mb-6 relative">
+                <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors"></div>
+                <div className="absolute bottom-4 left-4 bg-white px-3 py-1 rounded-full text-xs font-bold text-blue-600 shadow-sm">IMPACT</div>
+              </div>
+              <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">Teacher Wellbeing & Efficiency</h3>
+              <p className="text-slate-500 text-sm mb-3">Reducing burnout by automating administrative burdens.</p>
+              <div className="flex items-center text-sm font-medium text-slate-500 group-hover:text-blue-500 transition-colors">
+                READ MORE <span className="ml-2">→</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
