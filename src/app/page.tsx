@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import TeamGrid from '@/components/TeamGrid';
 import PartnershipForm from '@/components/PartnershipForm';
 import CountUp from '@/components/CountUp';
-import { Bot, BookOpen, Layers } from 'lucide-react';
+import { Bot, BookOpen, Layers, Users, TrendingUp, Lightbulb, CheckCircle2 } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -37,10 +37,14 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Dashboard Preview / Image Placeholder */}
+          {/* Dashboard Preview Image */}
           <div className="mt-16 relative mx-auto max-w-5xl rounded-2xl shadow-2xl glass-nav p-2 border border-slate-200/50 transform rotate-1 hover:rotate-0 transition-transform duration-700">
-            <div className="aspect-[16/9] bg-slate-50 rounded-xl overflow-hidden flex items-center justify-center">
-              <p className="text-slate-400 font-medium">Platform Dashboard Preview</p>
+            <div className="aspect-[16/9] bg-slate-50 rounded-xl overflow-hidden relative">
+              <img
+                src="/images/dashboard-mockup.png"
+                alt="Mentora Platform Dashboard"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -141,38 +145,38 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="group cursor-pointer">
-              <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden mb-6 relative">
-                <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors"></div>
+            <div className="group cursor-pointer bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-1">
+              <div className="aspect-video bg-fuchsia-50 rounded-xl overflow-hidden mb-6 relative flex items-center justify-center text-fuchsia-300 group-hover:bg-fuchsia-100 transition-colors">
+                <Users size={48} className="text-fuchsia-500" />
                 <div className="absolute bottom-4 left-4 bg-white px-3 py-1 rounded-full text-xs font-bold text-fuchsia-600 shadow-sm">CASE STUDY</div>
               </div>
               <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-fuchsia-600 transition-colors">Digital Transformation in Rural Schools</h3>
-              <p className="text-slate-500 text-sm mb-3">How AI tools bridge the resource gap in underserved regions.</p>
-              <div className="flex items-center text-sm font-medium text-slate-500 group-hover:text-fuchsia-500 transition-colors">
+              <p className="text-slate-500 text-sm mb-4 leading-relaxed">How AI tools bridge the resource gap in underserved regions, bringing quality education to all.</p>
+              <div className="flex items-center text-sm font-bold text-fuchsia-600 group-hover:text-fuchsia-700 transition-colors">
                 READ MORE <span className="ml-2">→</span>
               </div>
             </div>
 
-            <div className="group cursor-pointer">
-              <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden mb-6 relative">
-                <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors"></div>
+            <div className="group cursor-pointer bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-1">
+              <div className="aspect-video bg-violet-50 rounded-xl overflow-hidden mb-6 relative flex items-center justify-center text-violet-300 group-hover:bg-violet-100 transition-colors">
+                <BookOpen size={48} className="text-violet-500" />
                 <div className="absolute bottom-4 left-4 bg-white px-3 py-1 rounded-full text-xs font-bold text-violet-600 shadow-sm">PEDAGOGY</div>
               </div>
               <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-violet-600 transition-colors">Implementing CBC Effectively</h3>
-              <p className="text-slate-500 text-sm mb-3">A practical guide for teachers adapting to the new curriculum.</p>
-              <div className="flex items-center text-sm font-medium text-slate-500 group-hover:text-violet-500 transition-colors">
+              <p className="text-slate-500 text-sm mb-4 leading-relaxed">A practical, step-by-step guide for teachers adapting to the new Competency Based Curriculum.</p>
+              <div className="flex items-center text-sm font-bold text-violet-600 group-hover:text-violet-700 transition-colors">
                 READ MORE <span className="ml-2">→</span>
               </div>
             </div>
 
-            <div className="group cursor-pointer">
-              <div className="aspect-video bg-slate-100 rounded-2xl overflow-hidden mb-6 relative">
-                <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors"></div>
+            <div className="group cursor-pointer bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-1">
+              <div className="aspect-video bg-blue-50 rounded-xl overflow-hidden mb-6 relative flex items-center justify-center text-blue-300 group-hover:bg-blue-100 transition-colors">
+                <Lightbulb size={48} className="text-blue-500" />
                 <div className="absolute bottom-4 left-4 bg-white px-3 py-1 rounded-full text-xs font-bold text-blue-600 shadow-sm">IMPACT</div>
               </div>
               <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">Teacher Wellbeing & Efficiency</h3>
-              <p className="text-slate-500 text-sm mb-3">Reducing burnout by automating administrative burdens.</p>
-              <div className="flex items-center text-sm font-medium text-slate-500 group-hover:text-blue-500 transition-colors">
+              <p className="text-slate-500 text-sm mb-4 leading-relaxed">Strategies for reducing burnout by automating administrative burdens and focusing on teaching.</p>
+              <div className="flex items-center text-sm font-bold text-blue-600 group-hover:text-blue-700 transition-colors">
                 READ MORE <span className="ml-2">→</span>
               </div>
             </div>

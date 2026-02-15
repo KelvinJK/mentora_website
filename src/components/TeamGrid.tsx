@@ -24,9 +24,9 @@ const MOCK_TEAM: TeamMember[] = [
     {
         id: '3',
         name: 'Emmanuel Silayo',
-        role: 'Chief Technology Officer (CTO)',
+        role: 'Head of Engineering',
         imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel',
-        bio: 'AI & Platform Architecture Lead. Responsible for Mentora’s core technology, AI systems, data infrastructure, and platform scalability.',
+        bio: 'Oversees the development lifecycle, ensuring the platform architecture is robust, scalable, and secure.',
     },
     {
         id: '4',
