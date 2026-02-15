@@ -41,7 +41,7 @@ export default function Home() {
           <div className="mt-16 relative mx-auto max-w-5xl rounded-2xl shadow-2xl glass-nav p-2 border border-slate-200/50 transform rotate-1 hover:rotate-0 transition-transform duration-700">
             <div className="aspect-[16/9] bg-slate-50 rounded-xl overflow-hidden relative">
               <img
-                src="/images/dashboard-mockup.svg"
+                src="/images/dashboard-screenshot.png"
                 alt="Mentora Platform Dashboard"
                 className="w-full h-full object-cover"
               />
