@@ -23,49 +23,60 @@ export default function PartnershipForm() {
     const onSubmit = async (data: FormData) => {
         setIsSubmitting(true);
         setErrorDetails('');
+
         try {
-            const promises = [];
+            // 1. Create the Firestore promise
+            const saveToFirestore = async () => {
+                if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+                    console.warn('Firebase keys missing, skipping DB save.');
+                    return;
+                }
+                const docRef = await addDoc(collection(db, 'partnerships'), {
+                    ...data,
+                    createdAt: serverTimestamp(),
+                });
+                console.log('Document written with ID: ', docRef.id);
+                return docRef;
+            };
 
-            // 1. Save to Firebase
-            if (process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
-                promises.push(
-                    addDoc(collection(db, 'partnerships'), {
-                        ...data,
-                        createdAt: serverTimestamp(),
-                    })
-                );
-            }
+            // 2. Create the EmailJS promise (with error catching so it doesn't fail the whole request)
+            const sendEmailNotification = async () => {
+                const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+                const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+                const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
-            // 2. Send Email via EmailJS
-            if (process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID && process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID && process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
-                const templateParams = {
-                    to_email: 'mentoratanzania@gmail.com',
-                    organization: data.organization,
-                    from_email: data.email,
-                    partnership_area: data.partnershipArea,
-                    goals: data.goals,
-                };
+                if (serviceId && templateId && publicKey) {
+                    try {
+                        const templateParams = {
+                            to_email: 'mentoratanzania@gmail.com',
+                            organization: data.organization,
+                            from_email: data.email,
+                            partnership_area: data.partnershipArea,
+                            goals: data.goals,
+                        };
+                        await emailjs.send(serviceId, templateId, templateParams, publicKey);
+                        console.log('Email notification sent successfully');
+                    } catch (emailError) {
+                        console.error('Failed to send email notification:', emailError);
+                        // We suppress the error here so the user still sees "Success" if the DB save worked.
+                    }
+                } else {
+                    console.warn('EmailJS keys missing, skipping email.');
+                }
+            };
 
-                promises.push(
-                    emailjs.send(
-                        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-                        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-                        templateParams,
-                        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-                    )
-                );
-            } else {
-                console.warn('EmailJS keys are missing in .env.local. Email not sent.');
-            }
-
-            // Execute both in parallel
-            await Promise.all(promises);
+            // 3. Execute concurrently
+            // We prioritize the DB save. If email fails, we still want to show success.
+            await Promise.all([
+                saveToFirestore(),
+                sendEmailNotification()
+            ]);
 
             setSuccess(true);
             reset();
         } catch (error) {
             console.error('Error submitting form:', error);
-            setErrorDetails('Failed to submit. Please try again or contact us directly at mentoratanzania@gmail.com');
+            setErrorDetails('Something went wrong. Please check your internet connection and try again.');
         } finally {
             setIsSubmitting(false);
         }
