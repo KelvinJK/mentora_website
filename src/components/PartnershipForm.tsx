@@ -24,31 +24,42 @@ export default function PartnershipForm() {
         setIsSubmitting(true);
         setErrorDetails('');
         try {
+            const promises = [];
+
             // 1. Save to Firebase
             if (process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
-                await addDoc(collection(db, 'partnerships'), {
-                    ...data,
-                    createdAt: serverTimestamp(),
-                });
+                promises.push(
+                    addDoc(collection(db, 'partnerships'), {
+                        ...data,
+                        createdAt: serverTimestamp(),
+                    })
+                );
             }
 
             // 2. Send Email via EmailJS
             if (process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID && process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID && process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
-                await emailjs.send(
-                    process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-                    process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-                    {
-                        to_email: 'mentoratanzania@gmail.com', // Recipient
-                        organization: data.organization,
-                        from_email: data.email,
-                        partnership_area: data.partnershipArea,
-                        goals: data.goals,
-                    },
-                    process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+                const templateParams = {
+                    to_email: 'mentoratanzania@gmail.com',
+                    organization: data.organization,
+                    from_email: data.email,
+                    partnership_area: data.partnershipArea,
+                    goals: data.goals,
+                };
+
+                promises.push(
+                    emailjs.send(
+                        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+                        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+                        templateParams,
+                        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+                    )
                 );
             } else {
                 console.warn('EmailJS keys are missing in .env.local. Email not sent.');
             }
+
+            // Execute both in parallel
+            await Promise.all(promises);
 
             setSuccess(true);
             reset();

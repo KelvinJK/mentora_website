@@ -56,37 +56,10 @@ export default function TeamGrid() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchTeam() {
-            try {
-                // Build safe-guard: only try to fetch if we have valid config
-                // In a real app we'd just try specific collection
-                if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
-                    console.warn('Firebase config missing, using mock data');
-                    setTeam(MOCK_TEAM);
-                    setLoading(false);
-                    return;
-                }
-
-                const querySnapshot = await getDocs(collection(db, 'team_members'));
-                const members: TeamMember[] = [];
-                querySnapshot.forEach((doc) => {
-                    members.push({ id: doc.id, ...doc.data() } as TeamMember);
-                });
-
-                if (members.length === 0) {
-                    setTeam(MOCK_TEAM); // Fallback if DB is empty
-                } else {
-                    setTeam(members);
-                }
-            } catch (error) {
-                console.error('Error fetching team:', error);
-                setTeam(MOCK_TEAM); // Fallback on error
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        fetchTeam();
+        // PERF FIX: Using static data directly for instant loading. 
+        // Firestore fetch removed to prevent "loading..." delays.
+        setTeam(MOCK_TEAM);
+        setLoading(false);
     }, []);
 
     if (loading) {
