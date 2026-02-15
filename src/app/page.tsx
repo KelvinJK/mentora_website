@@ -41,7 +41,7 @@ export default function Home() {
           <div className="mt-16 relative mx-auto max-w-5xl rounded-2xl shadow-2xl glass-nav p-2 border border-slate-200/50 transform rotate-1 hover:rotate-0 transition-transform duration-700">
             <div className="aspect-[16/9] bg-slate-50 rounded-xl overflow-hidden relative">
               <img
-                src="/images/dashboard-screenshot.png"
+                src="/images/dashboard-hd.svg"
                 alt="Mentora Platform Dashboard"
                 className="w-full h-full object-cover"
               />
@@ -53,6 +53,10 @@ export default function Home() {
       {/* Stats Section */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold font-display text-slate-800">Our Reach</h2>
+            <div className="w-24 h-1 bg-fuchsia-500 mx-auto mt-4 rounded-full"></div>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
               <h3 className="text-4xl md:text-5xl font-bold text-fuchsia-600 mb-2">
