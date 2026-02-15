@@ -1,9 +1,4 @@
-import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import TeamGrid from '@/components/TeamGrid';
-import PartnershipForm from '@/components/PartnershipForm';
-import CountUp from '@/components/CountUp';
+import MissionVision from '@/components/MissionVision';
 import { Bot, BookOpen, Layers, Users, TrendingUp, Lightbulb, CheckCircle2 } from 'lucide-react';
 
 export default function Home() {
@@ -79,6 +74,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Mission & Vision Section */}
+      <MissionVision />
 
       {/* Why Mentora? / Features */}
       <section id="features" className="py-24 bg-white relative">
