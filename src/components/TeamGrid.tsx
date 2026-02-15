@@ -46,7 +46,7 @@ const MOCK_TEAM: TeamMember[] = [
         id: '6',
         name: 'Christina Haule',
         role: 'Communications & Community Lead',
-        imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Christina',
+        imageUrl: '/images/team/christina.jpg',
         bio: 'Brand, Teacher Engagement & Adoption. Builds Mentora’s public presence and teacher loyalty.',
     },
 ];
