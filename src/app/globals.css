@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap');
+
+:root {
+  --foreground-rgb: 30, 41, 59;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 248, 250, 252;
+  --font-fira-sans: 'Fira Sans', sans-serif;
+  --font-plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: white;
+  font-family: var(--font-fira-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom Glassmorphism Utility */
+.glass-nav {
+  @apply bg-white/80 backdrop-blur-md border-b border-slate-100/50;
+}
+
+/* Custom Gradient Text Utility */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-600 to-violet-600;
+}
