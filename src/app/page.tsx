@@ -1,3 +1,9 @@
+import Link from 'next/link';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import TeamGrid from '@/components/TeamGrid';
+import PartnershipForm from '@/components/PartnershipForm';
+import CountUp from '@/components/CountUp';
 import MissionVision from '@/components/MissionVision';
 import { Bot, BookOpen, Layers, Users, TrendingUp, Lightbulb, CheckCircle2 } from 'lucide-react';
 
