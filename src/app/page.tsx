@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TeamGrid from '@/components/TeamGrid';
@@ -6,7 +7,6 @@ import PartnershipForm from '@/components/PartnershipForm';
 import CountUp from '@/components/CountUp';
 import MissionVision from '@/components/MissionVision';
 import ResourceStories from '@/components/ResourceStories';
-import { Bot, BookOpen, Layers } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -104,8 +104,14 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature 1 */}
             <div className="group p-8 rounded-2xl border border-slate-100 bg-white hover:shadow-xl hover:shadow-purple-100/50 transition-all duration-300 hover:-translate-y-2">
-              <div className="w-14 h-14 rounded-xl bg-fuchsia-50 flex items-center justify-center mb-6 text-fuchsia-600 group-hover:bg-fuchsia-600 group-hover:text-white transition-colors">
-                <Bot size={28} />
+              <div className="w-20 h-20 mb-6 transform group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
+                <Image
+                  src="/images/icons/pencil.png.png"
+                  alt="AI Lesson Plans"
+                  width={80}
+                  height={80}
+                  className="object-contain drop-shadow-lg"
+                />
               </div>
               <h3 className="text-xl font-bold text-slate-800 mb-3">AI Lesson Plans</h3>
               <p className="text-slate-500 leading-relaxed">
@@ -115,8 +121,14 @@ export default function Home() {
 
             {/* Feature 2 */}
             <div className="group p-8 rounded-2xl border border-slate-100 bg-white hover:shadow-xl hover:shadow-purple-100/50 transition-all duration-300 hover:-translate-y-2">
-              <div className="w-14 h-14 rounded-xl bg-violet-50 flex items-center justify-center mb-6 text-violet-600 group-hover:bg-violet-600 group-hover:text-white transition-colors">
-                <BookOpen size={28} />
+              <div className="w-20 h-20 mb-6 transform group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
+                <Image
+                  src="/images/icons/book.png.png"
+                  alt="CBC Compliance"
+                  width={80}
+                  height={80}
+                  className="object-contain drop-shadow-lg"
+                />
               </div>
               <h3 className="text-xl font-bold text-slate-800 mb-3">CBC Compliance</h3>
               <p className="text-slate-500 leading-relaxed">
@@ -126,8 +138,14 @@ export default function Home() {
 
             {/* Feature 3 */}
             <div className="group p-8 rounded-2xl border border-slate-100 bg-white hover:shadow-xl hover:shadow-purple-100/50 transition-all duration-300 hover:-translate-y-2">
-              <div className="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <Layers size={28} />
+              <div className="w-20 h-20 mb-6 transform group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
+                <Image
+                  src="/images/icons/star.png.png"
+                  alt="Reduce Complexity"
+                  width={80}
+                  height={80}
+                  className="object-contain drop-shadow-lg"
+                />
               </div>
               <h3 className="text-xl font-bold text-slate-800 mb-3">Reduce Complexity</h3>
               <p className="text-slate-500 leading-relaxed">
