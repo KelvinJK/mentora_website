@@ -59,24 +59,30 @@ export default function Home() {
             <h2 className="text-3xl font-bold font-display text-slate-800">Our Reach</h2>
             <div className="w-24 h-1 bg-fuchsia-500 mx-auto mt-4 rounded-full"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
               <h3 className="text-4xl md:text-5xl font-bold text-fuchsia-600 mb-2">
-                <CountUp end={400} suffix="+" />
+                <CountUp end={100} suffix="+" />
               </h3>
               <p className="text-slate-600 font-medium">Partner Schools</p>
+            </div>
+            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
+              <h3 className="text-4xl md:text-5xl font-bold text-violet-600 mb-2">
+                <CountUp end={400} suffix="+" />
+              </h3>
+              <p className="text-slate-600 font-medium">Teachers Reached</p>
+            </div>
+            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
+              <h3 className="text-4xl md:text-5xl font-bold text-fuchsia-600 mb-2">
+                <CountUp end={10000} suffix="+" duration={2500} />
+              </h3>
+              <p className="text-slate-600 font-medium">Students Impacted</p>
             </div>
             <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
               <h3 className="text-4xl md:text-5xl font-bold text-violet-600 mb-2">
                 <CountUp end={7} duration={1500} />
               </h3>
               <p className="text-slate-600 font-medium">Regions Covered</p>
-            </div>
-            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
-              <h3 className="text-4xl md:text-5xl font-bold text-fuchsia-600 mb-2">
-                <CountUp end={50000} suffix="+" duration={2500} />
-              </h3>
-              <p className="text-slate-600 font-medium">Students Impacted</p>
             </div>
           </div>
         </div>

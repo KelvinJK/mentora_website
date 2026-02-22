@@ -24,7 +24,7 @@
   <g transform="translate(240, 0)">
     <!-- Header -->
     <text x="40" y="60" font-family="sans-serif" font-size="28" font-weight="bold" fill="#0f172a">Welcome back, Jane</text>
-    <text x="40" y="85" font-family="sans-serif" font-size="14" fill="#64748b">October 26, 2026</text>
+    <text x="40" y="85" font-family="sans-serif" font-size="14" fill="#64748b">October 26, 2025</text>
 
     <!-- Top Cards Row -->
     <g transform="translate(40, 120)">
