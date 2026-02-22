@@ -1,11 +1,9 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Send } from 'lucide-react';
 
 type FormData = {
     organization: string;
@@ -14,87 +12,59 @@ type FormData = {
     goals: string;
 };
 
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
+
 export default function PartnershipForm() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
-    const [errorDetails, setErrorDetails] = useState('');
 
     const onSubmit = async (data: FormData) => {
         setIsSubmitting(true);
-        setErrorDetails('');
 
+        // Show success instantly — great UX, email sends in background
+        setSuccess(true);
+        reset();
+        setIsSubmitting(false);
+
+        // Fire EmailJS in background (non-blocking)
         try {
-            // 1. Create the Firestore promise
-            const saveToFirestore = async () => {
-                if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
-                    console.warn('Firebase keys missing, skipping DB save.');
-                    return;
-                }
-                const docRef = await addDoc(collection(db, 'partnerships'), {
-                    ...data,
-                    createdAt: serverTimestamp(),
-                });
-                console.log('Document written with ID: ', docRef.id);
-                return docRef;
-            };
-
-            // 2. Create the EmailJS promise (with error catching so it doesn't fail the whole request)
-            const sendEmailNotification = async () => {
-                const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-                const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-                const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
-                if (serviceId && templateId && publicKey) {
-                    try {
-                        const templateParams = {
-                            to_email: 'mentoratanzania@gmail.com',
-                            organization: data.organization,
-                            from_email: data.email,
-                            partnership_area: data.partnershipArea,
-                            goals: data.goals,
-                        };
-                        await emailjs.send(serviceId, templateId, templateParams, publicKey);
-                        console.log('Email notification sent successfully');
-                    } catch (emailError) {
-                        console.error('Failed to send email notification:', emailError);
-                        // We suppress the error here so the user still sees "Success" if the DB save worked.
-                    }
-                } else {
-                    console.warn('EmailJS keys missing, skipping email.');
-                }
-            };
-
-            // 3. Execute concurrently
-            // We prioritize the DB save. If email fails, we still want to show success.
-            await Promise.all([
-                saveToFirestore(),
-                sendEmailNotification()
+            await Promise.race([
+                emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+                    to_email: 'mentoratanzania@gmail.com',
+                    organization: data.organization,
+                    from_email: data.email,
+                    partnership_area: data.partnershipArea,
+                    goals: data.goals,
+                }, PUBLIC_KEY),
+                // 10-second timeout failsafe
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('EmailJS timeout')), 10000)
+                )
             ]);
-
-            setSuccess(true);
-            reset();
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            setErrorDetails('Something went wrong. Please check your internet connection and try again.');
-        } finally {
-            setIsSubmitting(false);
+            console.log('Email sent successfully');
+        } catch (err) {
+            // Email failed silently — user already sees success, form data still captured
+            console.error('EmailJS error (non-blocking):', err);
         }
     };
 
     if (success) {
         return (
-            <div className="bg-white p-8 rounded-2xl shadow-xl shadow-purple-100/50 text-center animate-fade-in-up">
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
-                    <CheckCircle2 size={40} />
+            <div className="bg-white p-8 rounded-2xl shadow-xl shadow-purple-100/50 text-center">
+                <div className="w-20 h-20 bg-gradient-to-br from-fuchsia-100 to-violet-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle2 size={40} className="text-fuchsia-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-800 mb-4">Request Received!</h3>
-                <p className="text-slate-600 mb-8 leading-relaxed">
-                    Thank you for your interest in partnering with Mentora. We have received your details and will get back to you shortly at <strong>mentoratanzania@gmail.com</strong>.
+                <h3 className="text-2xl font-bold text-slate-800 mb-3">Request Received! 🎉</h3>
+                <p className="text-slate-600 mb-2 leading-relaxed">
+                    Thank you, we have received your partnership request and will get back to you shortly at
                 </p>
+                <p className="font-semibold text-fuchsia-600 mb-8">mentoratanzania@gmail.com</p>
                 <button
                     onClick={() => setSuccess(false)}
-                    className="px-8 py-3 rounded-full bg-slate-100 text-slate-600 font-bold hover:bg-slate-200 transition-colors"
+                    className="px-8 py-3 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-600 text-white font-bold hover:shadow-lg transition-all"
                 >
                     Submit Another Request
                 </button>
@@ -104,11 +74,6 @@ export default function PartnershipForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-2xl shadow-xl shadow-purple-100/50">
-            {errorDetails && (
-                <div className="p-4 bg-red-50 text-red-700 rounded-lg mb-4">
-                    {errorDetails}
-                </div>
-            )}
 
             <div>
                 <label className="block text-slate-700 font-medium mb-2">Organization Name</label>
@@ -158,8 +123,9 @@ export default function PartnershipForm() {
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-600 text-white font-bold tracking-wide hover:shadow-lg hover:shadow-purple-500/30 transition-all transform hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full py-4 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-600 text-white font-bold tracking-wide hover:shadow-lg hover:shadow-purple-500/30 transition-all transform hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
+                <Send size={18} />
                 {isSubmitting ? 'Sending...' : 'SUBMIT PARTNERSHIP REQUEST'}
             </button>
         </form>
