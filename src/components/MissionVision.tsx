@@ -1,6 +1,7 @@
 'use client';
 
-import { Target, Eye, Heart, Zap, Shield, Users } from 'lucide-react';
+import Image from 'next/image';
+import { Heart, Zap, Shield, Users } from 'lucide-react';
 
 export default function MissionVision() {
     return (
@@ -9,9 +10,9 @@ export default function MissionVision() {
                 {/* Mission & Vision Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
                     {/* Mission */}
-                    <div className="bg-fuchsia-50 rounded-3xl p-10 border border-fuchsia-100 hover:shadow-lg transition-all duration-300">
-                        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 text-fuchsia-600 shadow-sm">
-                            <Target size={32} />
+                    <div className="bg-fuchsia-50 rounded-3xl p-10 border border-fuchsia-100 hover:shadow-lg transition-all duration-300 group">
+                        <div className="w-20 h-20 mb-6 transform group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
+                            <Image src="/images/icons/target.png" alt="Mission" width={80} height={80} className="object-contain drop-shadow-lg" />
                         </div>
                         <h2 className="text-3xl font-bold font-display text-slate-900 mb-4">Our Mission</h2>
                         <p className="text-lg text-slate-700 leading-relaxed">
@@ -20,9 +21,9 @@ export default function MissionVision() {
                     </div>
 
                     {/* Vision */}
-                    <div className="bg-violet-50 rounded-3xl p-10 border border-violet-100 hover:shadow-lg transition-all duration-300">
-                        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 text-violet-600 shadow-sm">
-                            <Eye size={32} />
+                    <div className="bg-violet-50 rounded-3xl p-10 border border-violet-100 hover:shadow-lg transition-all duration-300 group">
+                        <div className="w-20 h-20 mb-6 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                            <Image src="/images/icons/sun.png" alt="Vision" width={80} height={80} className="object-contain drop-shadow-lg" />
                         </div>
                         <h2 className="text-3xl font-bold font-display text-slate-900 mb-4">Our Vision</h2>
                         <p className="text-lg text-slate-700 leading-relaxed">
