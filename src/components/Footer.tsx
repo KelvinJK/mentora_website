@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Facebook, Twitter, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 
 export default function Footer() {
     return (
@@ -18,12 +18,15 @@ export default function Footer() {
                             <a href="https://www.instagram.com/mentora_tz/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-fuchsia-600 hover:text-white transition-colors cursor-pointer">
                                 <Instagram size={18} />
                             </a>
-                            <a href="https://www.facebook.com/profile.php?id=61585366216744" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-fuchsia-600 hover:text-white transition-colors cursor-pointer">
+                            <a href="https://www.facebook.com/photo.php?fbid=122099498511277196&set=pb.61588315900770.-2207520000&type=3" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-fuchsia-600 hover:text-white transition-colors cursor-pointer">
                                 <Facebook size={18} />
                             </a>
-                            <a href="https://www.tiktok.com/@mentora.tanzania" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-fuchsia-600 hover:text-white transition-colors cursor-pointer">
-                                {/* Custom TikTok Icon using a generic video icon for now as Lucide might not have it, or reusing an existing one. Using a path for TikTok logo approximation if needed, or just a video icon */}
-                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" /></svg>
+                            <a href="https://www.threads.com/@mentora_tz" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-fuchsia-600 hover:text-white transition-colors cursor-pointer">
+                                {/* Threads Icon */}
+                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.34-.779-.93-1.318-1.455-1.632a6.12 6.12 0 0 1-.488 2.35c-.535 1.274-1.397 2.15-2.493 2.533-.94.328-2.07.36-3.176.089-1.226-.3-2.24-1.013-2.856-2.008-.542-.875-.78-1.947-.688-3.1.17-2.14 1.64-3.628 3.86-3.906 1.264-.158 2.405.06 3.398.651.153-.8.196-1.726.094-2.767l2.054-.215c.16 1.527.05 2.852-.322 3.952 1.082.783 1.907 1.783 2.379 2.86.768 1.756.86 4.558-1.252 6.627-1.794 1.76-4.03 2.544-7.24 2.569l-.003-.002zm-1.078-7.29c-.2.02-.39.05-.574.095 1.04-.021 1.83-.357 2.312-1.018.37-.505.52-1.142.461-1.878-.076-.943-.58-1.576-1.37-1.683-.5-.068-1.028.01-1.53.228-.72.315-1.213.883-1.375 1.585-.14.614-.05 1.22.25 1.72.36.593.92.889 1.592 1.014.066.014.249-.022.234-.063z" /></svg>
+                            </a>
+                            <a href="https://www.linkedin.com/company/112026048/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-fuchsia-600 hover:text-white transition-colors cursor-pointer">
+                                <Linkedin size={18} />
                             </a>
                         </div>
                     </div>

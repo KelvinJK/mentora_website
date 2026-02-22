@@ -37,9 +37,9 @@ const MOCK_TEAM: TeamMember[] = [
     },
     {
         id: '5',
-        name: 'Angel Msechu',
+        name: 'Chelsea Wilhelm',
         role: 'Operations & Growth Manager',
-        imageUrl: '/images/team/angel.jpg?v=updated',
+        imageUrl: '/images/team/chelsea.jpg?v=updated',
         bio: 'Systems, Implementation & Scaling. Turns strategy into execution and ensures Mentora runs efficiently across pilots, schools, and partners.',
     },
     {
