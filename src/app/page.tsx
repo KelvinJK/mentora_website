@@ -118,7 +118,7 @@ export default function Home() {
             <div className="group p-8 rounded-2xl border border-slate-100 bg-white hover:shadow-xl hover:shadow-purple-100/50 transition-all duration-300 hover:-translate-y-2">
               <div className="w-20 h-20 mb-6 transform group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
                 <Image
-                  src="/images/icons/pencil.png.png"
+                  src="/images/icons/monitor.png"
                   alt="AI Lesson Plans"
                   width={80}
                   height={80}
@@ -152,7 +152,7 @@ export default function Home() {
             <div className="group p-8 rounded-2xl border border-slate-100 bg-white hover:shadow-xl hover:shadow-purple-100/50 transition-all duration-300 hover:-translate-y-2">
               <div className="w-20 h-20 mb-6 transform group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
                 <Image
-                  src="/images/icons/star.png.png"
+                  src="/images/icons/puzzle.png"
                   alt="Reduce Complexity"
                   width={80}
                   height={80}
