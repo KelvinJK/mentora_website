@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { Heart, Zap, Shield, Users } from 'lucide-react';
 
 export default function MissionVision() {
     return (
@@ -40,29 +39,29 @@ export default function MissionVision() {
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div className="text-center p-6 rounded-2xl hover:bg-slate-50 transition-colors group">
-                        <div className="w-12 h-12 mx-auto bg-slate-100 rounded-full flex items-center justify-center mb-4 text-slate-600 group-hover:bg-fuchsia-100 group-hover:text-fuchsia-600 transition-colors">
-                            <Zap size={24} />
+                        <div className="w-16 h-16 mx-auto mb-4 transform group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
+                            <Image src="/images/icons/star.png.png" alt="Innovation" width={64} height={64} className="object-contain drop-shadow-lg" />
                         </div>
                         <h4 className="font-bold text-slate-800 mb-1">Innovation</h4>
                         <p className="text-sm text-slate-500">Forward-thinking solutions</p>
                     </div>
                     <div className="text-center p-6 rounded-2xl hover:bg-slate-50 transition-colors group">
-                        <div className="w-12 h-12 mx-auto bg-slate-100 rounded-full flex items-center justify-center mb-4 text-slate-600 group-hover:bg-violet-100 group-hover:text-violet-600 transition-colors">
-                            <Shield size={24} />
+                        <div className="w-16 h-16 mx-auto mb-4 transform group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
+                            <Image src="/images/icons/shield.png" alt="Integrity" width={64} height={64} className="object-contain drop-shadow-lg" />
                         </div>
                         <h4 className="font-bold text-slate-800 mb-1">Integrity</h4>
                         <p className="text-sm text-slate-500">Trust and transparency</p>
                     </div>
                     <div className="text-center p-6 rounded-2xl hover:bg-slate-50 transition-colors group">
-                        <div className="w-12 h-12 mx-auto bg-slate-100 rounded-full flex items-center justify-center mb-4 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-600 transition-colors">
-                            <Heart size={24} />
+                        <div className="w-16 h-16 mx-auto mb-4 transform group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
+                            <Image src="/images/icons/gift.png" alt="Impact" width={64} height={64} className="object-contain drop-shadow-lg" />
                         </div>
                         <h4 className="font-bold text-slate-800 mb-1">Impact</h4>
                         <p className="text-sm text-slate-500">Measurable results</p>
                     </div>
                     <div className="text-center p-6 rounded-2xl hover:bg-slate-50 transition-colors group">
-                        <div className="w-12 h-12 mx-auto bg-slate-100 rounded-full flex items-center justify-center mb-4 text-slate-600 group-hover:bg-green-100 group-hover:text-green-600 transition-colors">
-                            <Users size={24} />
+                        <div className="w-16 h-16 mx-auto mb-4 transform group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
+                            <Image src="/images/icons/megaphone.png" alt="Community" width={64} height={64} className="object-contain drop-shadow-lg" />
                         </div>
                         <h4 className="font-bold text-slate-800 mb-1">Community</h4>
                         <p className="text-sm text-slate-500">Growing together</p>
