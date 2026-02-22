@@ -60,25 +60,37 @@ export default function Home() {
             <div className="w-24 h-1 bg-fuchsia-500 mx-auto mt-4 rounded-full"></div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
+            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300 group">
+              <div className="flex justify-center mb-4">
+                <Image src="/images/icons/book.png.png" alt="Partner Schools" width={64} height={64} className="object-contain drop-shadow-lg group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300" />
+              </div>
               <h3 className="text-4xl md:text-5xl font-bold text-fuchsia-600 mb-2">
                 <CountUp end={100} suffix="+" />
               </h3>
               <p className="text-slate-600 font-medium">Partner Schools</p>
             </div>
-            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
+            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300 group">
+              <div className="flex justify-center mb-4">
+                <Image src="/images/icons/person.png.png" alt="Teachers Reached" width={64} height={64} className="object-contain drop-shadow-lg group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300" />
+              </div>
               <h3 className="text-4xl md:text-5xl font-bold text-violet-600 mb-2">
                 <CountUp end={400} suffix="+" />
               </h3>
               <p className="text-slate-600 font-medium">Teachers Reached</p>
             </div>
-            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
+            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300 group">
+              <div className="flex justify-center mb-4">
+                <Image src="/images/icons/star.png.png" alt="Students Impacted" width={64} height={64} className="object-contain drop-shadow-lg group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300" />
+              </div>
               <h3 className="text-4xl md:text-5xl font-bold text-fuchsia-600 mb-2">
                 <CountUp end={10000} suffix="+" duration={2500} />
               </h3>
               <p className="text-slate-600 font-medium">Students Impacted</p>
             </div>
-            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300">
+            <div className="p-8 bg-white rounded-2xl shadow-sm border border-slate-100 transform hover:scale-105 transition-transform duration-300 group">
+              <div className="flex justify-center mb-4">
+                <Image src="/images/icons/map-pin.png.png" alt="Regions Covered" width={64} height={64} className="object-contain drop-shadow-lg group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300" />
+              </div>
               <h3 className="text-4xl md:text-5xl font-bold text-violet-600 mb-2">
                 <CountUp end={7} duration={1500} />
               </h3>
