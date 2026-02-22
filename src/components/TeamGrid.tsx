@@ -30,9 +30,9 @@ const MOCK_TEAM: TeamMember[] = [
     },
     {
         id: '4',
-        name: 'Simon Flavian',
+        name: 'Sued Haruna',
         role: 'Head of Product & Learning Design',
-        imageUrl: '/images/team/simon.jpg?v=updated',
+        imageUrl: '/images/team/sued.jpg?v=updated',
         bio: 'Curriculum & Pedagogical Intelligence. Ensures Mentora aligns deeply with Tanzania’s CBC and delivers real classroom value.',
     },
     {
