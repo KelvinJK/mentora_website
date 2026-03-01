@@ -16,9 +16,9 @@ const MOCK_TEAM: TeamMember[] = [
     },
     {
         id: '2',
-        name: 'Faith Mwasabwite',
+        name: 'Faith Kessy',
         role: 'Chief Technology Officer (CTO)',
-        imageUrl: '/images/team/faith.jpg?v=updated',
+        imageUrl: '/images/team/faith-kessy.png?v=updated',
         bio: 'AI & Platform Architecture Lead. Responsible for Mentora’s core technology, AI systems, and platform scalability.',
     },
     {

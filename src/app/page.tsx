@@ -30,7 +30,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a
-              href="https://mentoratanzania.com/"
+              href="https://mentoraapp.xyz/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-600 text-white font-bold tracking-wide hover:shadow-glow transition-all transform hover:-translate-y-1 inline-block"
