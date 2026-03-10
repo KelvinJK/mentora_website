@@ -65,7 +65,7 @@ export default function Home() {
                 <Image src="/images/icons/book.png.png" alt="Partner Schools" width={64} height={64} className="object-contain drop-shadow-lg group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300" />
               </div>
               <h3 className="text-4xl md:text-5xl font-bold text-fuchsia-600 mb-2">
-                <CountUp end={100} suffix="+" />
+                <CountUp end={17} suffix="+" />
               </h3>
               <p className="text-slate-600 font-medium">Partner Schools</p>
             </div>
@@ -74,7 +74,7 @@ export default function Home() {
                 <Image src="/images/icons/person.png.png" alt="Teachers Reached" width={64} height={64} className="object-contain drop-shadow-lg group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300" />
               </div>
               <h3 className="text-4xl md:text-5xl font-bold text-violet-600 mb-2">
-                <CountUp end={400} suffix="+" />
+                <CountUp end={100} suffix="+" />
               </h3>
               <p className="text-slate-600 font-medium">Teachers Reached</p>
             </div>
@@ -83,7 +83,7 @@ export default function Home() {
                 <Image src="/images/icons/star.png.png" alt="Students Impacted" width={64} height={64} className="object-contain drop-shadow-lg group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300" />
               </div>
               <h3 className="text-4xl md:text-5xl font-bold text-fuchsia-600 mb-2">
-                <CountUp end={10000} suffix="+" duration={2500} />
+                <CountUp end={4000} suffix="+" duration={2500} />
               </h3>
               <p className="text-slate-600 font-medium">Students Impacted</p>
             </div>
