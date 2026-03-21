@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   authors: [{ name: "Mentora Team" }],
   creator: "Mentora",
   publisher: "Mentora Tanzania",
+  icons: {
+    icon: "https://mentoraapp.xyz/favicon.ico",
+    apple: "https://mentoraapp.xyz/logo192.png",
+  },
   openGraph: {
     title: "Mentora Tanzania | Empower Teaching with Intelligence",
     description: "Transforming education in Tanzania through AI-driven lesson plans, interactive learning, and teacher empowerment.",
