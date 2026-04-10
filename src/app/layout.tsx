@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fira_Sans, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { CSPostHogProvider } from "./providers";
+import CookieBanner from "@/components/CookieBanner";
 
 const firaSans = Fira_Sans({
   subsets: ["latin"],
@@ -64,6 +65,7 @@ export default function RootLayout({
       >
         <CSPostHogProvider>
           {children}
+          <CookieBanner />
         </CSPostHogProvider>
       </body>
     </html>
