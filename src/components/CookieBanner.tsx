@@ -60,7 +60,7 @@ export default function CookieBanner() {
               </div>
               
               <p className="text-slate-600 text-sm mt-4 font-sans leading-relaxed">
-                We use cookies to improve your experience, analyze traffic, and personalize content. By clicking "Accept", you consent to our use of cookies.
+                We use cookies to improve your experience, analyze traffic, and personalize content. By clicking &quot;Accept&quot;, you consent to our use of cookies.
               </p>
 
               <div className="flex gap-3 mt-6">
