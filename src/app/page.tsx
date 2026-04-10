@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TeamGrid from '@/components/TeamGrid';
 import PartnershipForm from '@/components/PartnershipForm';
+import TryForFreeButton from '@/components/TryForFreeButton';
 import CountUp from '@/components/CountUp';
 import MissionVision from '@/components/MissionVision';
 import ResourceStories from '@/components/ResourceStories';
@@ -29,14 +30,7 @@ export default function Home() {
             Mentora provides AI-driven lesson plans, automated assessments, and continuous professional development to help teachers focus on what matters most—their students.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a
-              href="https://mentoraapp.xyz/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-600 text-white font-bold tracking-wide hover:shadow-glow transition-all transform hover:-translate-y-1 inline-block"
-            >
-              TRY FOR FREE
-            </a>
+            <TryForFreeButton />
           </div>
 
           {/* Dashboard Preview Image */}
