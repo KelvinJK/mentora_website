@@ -3,6 +3,7 @@ import { Fira_Sans, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { CSPostHogProvider } from "./providers";
 import CookieBanner from "@/components/CookieBanner";
+import { AuthProvider } from "@/context/AuthContext";
 
 const firaSans = Fira_Sans({
   subsets: ["latin"],
@@ -64,8 +65,10 @@ export default function RootLayout({
         className={`${firaSans.variable} ${plusJakartaSans.variable} font-sans antialiased text-slate-800 bg-slate-50`}
       >
         <CSPostHogProvider>
-          {children}
-          <CookieBanner />
+          <AuthProvider>
+            {children}
+            <CookieBanner />
+          </AuthProvider>
         </CSPostHogProvider>
       </body>
     </html>

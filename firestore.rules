@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      // 1. Users can ONLY read their own profile
+      allow read: if request.auth != null && request.auth.uid == userId;
+      
+      // 2. Initializing new profiles (from frontend)
+      // They are exclusively allowed to give themselves the 'trial' tier, nothing else!
+      allow create: if request.auth != null 
+                    && request.auth.uid == userId
+                    && request.resource.data.tier == 'trial';
+      
+      // 3. Updating profile demographics (from onboarding or profile hub)
+      // Prevent ANY client-side modifications to billing or access status!
+      // Only the Server (Webhook) can modify these protected fields.
+      allow update: if request.auth != null 
+                    && request.auth.uid == userId
+                    && !request.resource.data.diff(resource.data).affectedKeys()
+                        .hasAny(['tier', 'trialStartDate', 'subscriptionExpiresAt', 'uid', 'email']);
+    }
+    
+    // Default deny for all other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

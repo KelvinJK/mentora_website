@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User as UserIcon } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const { user, mentoraUser } = useAuth();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -30,6 +32,21 @@ export default function Navbar() {
                         <Link href="#about" className="text-slate-600 hover:text-fuchsia-600 transition-colors font-medium">About</Link>
                         <Link href="#team" className="text-slate-600 hover:text-fuchsia-600 transition-colors font-medium">Team</Link>
                         <Link href="#resources" className="text-slate-600 hover:text-fuchsia-600 transition-colors font-medium">Resources</Link>
+                        <Link href="/billing" className="text-fuchsia-600 hover:text-fuchsia-700 transition-colors font-semibold">Pricing</Link>
+                        {user ? (
+                            <Link href="/profile" className="flex items-center gap-2 text-slate-800 font-medium hover:text-fuchsia-600 transition-colors">
+                                {mentoraUser?.photoURL ? (
+                                    <img src={mentoraUser.photoURL} alt="Avatar" className="w-8 h-8 rounded-full object-cover border border-slate-200" />
+                                ) : (
+                                    <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200">
+                                        <UserIcon size={16} className="text-slate-500" />
+                                    </div>
+                                )}
+                                <span>Account</span>
+                            </Link>
+                        ) : (
+                            <Link href="/login" className="text-slate-600 hover:text-fuchsia-600 transition-colors font-medium">Sign In</Link>
+                        )}
                         <Link href="#contact" className="px-6 py-2.5 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-600 text-white font-medium hover:shadow-glow transition-all transform hover:-translate-y-0.5">
                             Partner With Us
                         </Link>
@@ -52,6 +69,19 @@ export default function Navbar() {
                     <Link href="#about" className="text-slate-600 font-medium p-2 block" onClick={() => setIsOpen(false)}>About</Link>
                     <Link href="#team" className="text-slate-600 font-medium p-2 block" onClick={() => setIsOpen(false)}>Team</Link>
                     <Link href="#resources" className="text-slate-600 font-medium p-2 block" onClick={() => setIsOpen(false)}>Resources</Link>
+                    <Link href="/billing" className="text-fuchsia-600 font-semibold p-2 block" onClick={() => setIsOpen(false)}>Pricing</Link>
+                    {user ? (
+                        <Link href="/profile" className="flex items-center gap-2 text-slate-800 font-medium p-2" onClick={() => setIsOpen(false)}>
+                            {mentoraUser?.photoURL ? (
+                                <img src={mentoraUser.photoURL} alt="Avatar" className="w-6 h-6 rounded-full object-cover" />
+                            ) : (
+                                <UserIcon size={20} className="text-slate-500" />
+                            )}
+                            My Account
+                        </Link>
+                    ) : (
+                        <Link href="/login" className="text-slate-600 font-medium p-2 block" onClick={() => setIsOpen(false)}>Sign In</Link>
+                    )}
                     <Link href="#contact" className="text-fuchsia-600 font-bold p-2 block" onClick={() => setIsOpen(false)}>Partner With Us</Link>
                 </div>
             )}

@@ -22,3 +22,20 @@ export interface Resource {
   description: string;
   link: string;
 }
+
+export type SubscriptionTier = 'trial' | 'basic' | 'pro' | 'premium' | 'expired';
+
+export interface MentoraUser {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  tier: SubscriptionTier;
+  trialStartDate: Date | any; // Firestore Timestamp
+  subscriptionExpiresAt: Date | any | null; // null if on trial or lifelong
+  createdAt: Date | any;
+  schoolName?: string;
+  gradeTaught?: string;
+  schoolType?: 'Public' | 'Private' | 'International';
+  region?: string;
+  photoURL?: string | null;
+}
