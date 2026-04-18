@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { adminDb } from '@/lib/firebase-admin';
+import { getAdminDb } from '@/lib/firebase-admin';
 import { SubscriptionTier } from '@/types';
 import crypto from 'crypto';
 
@@ -73,6 +73,11 @@ export async function POST(req: Request) {
       // Set expiration to 30 days from now
       const expirationDate = new Date();
       expirationDate.setDate(expirationDate.getDate() + 30);
+
+      const adminDb = getAdminDb();
+      if (!adminDb) {
+        return NextResponse.json({ error: 'Firebase Admin not initialized properly' }, { status: 500 });
+      }
 
       const userRef = adminDb.collection('users').doc(uid);
       await userRef.update({
