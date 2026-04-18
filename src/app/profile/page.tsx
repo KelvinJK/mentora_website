@@ -187,7 +187,7 @@ export default function ProfilePage() {
                   <select
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-fuchsia-600 focus:border-transparent outline-none transition-all bg-white"
                     value={schoolType}
-                    onChange={(e) => setSchoolType(e.target.value)}
+                    onChange={(e) => setSchoolType(e.target.value as "Public" | "Private" | "International")}
                   >
                     <option value="Public">Public</option>
                     <option value="Private">Private</option>
