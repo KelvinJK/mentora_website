@@ -77,7 +77,7 @@ export async function POST(req: Request) {
       const userRef = adminDb.collection('users').doc(uid);
       await userRef.update({
         tier: tier,
-        subscriptionExpiresAt: adminDb.constructor.Timestamp.fromDate(expirationDate),
+        subscriptionExpiresAt: expirationDate,
       });
 
       return NextResponse.json({ success: true, message: 'Subscription successfully upgraded' }, { status: 200 });
