@@ -15,7 +15,7 @@ export default function BillingPage() {
   const SNIPPE_LINKS = {
     basic: `https://snippe.me/pay/mentora-basic-plan?metadata[uid]=${user?.uid}&metadata[plan]=basic&webhook_url=${WEBHOOK_URL}`,
     pro: `https://snippe.me/pay/mentora-pro-plan?metadata[uid]=${user?.uid}&metadata[plan]=pro&webhook_url=${WEBHOOK_URL}`,
-    premium: `https://snippe.me/pay/mentora-premium-plan?metadata[uid]=${user?.uid}&metadata[plan]=premium&webhook_url=${WEBHOOK_URL}`,
+    premium: `https://snippe.me/pay/premium-plan?metadata[uid]=${user?.uid}&metadata[plan]=premium&webhook_url=${WEBHOOK_URL}`,
   };
 
   const getCheckoutLink = (tier: keyof typeof SNIPPE_LINKS) => {
