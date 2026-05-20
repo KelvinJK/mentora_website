@@ -1,15 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    async redirects() {
-        return [
-            {
-                source: '/:path*',
-                has: [{ type: 'host', value: 'mentoratanzania.com' }],
-                destination: 'https://mentoraapp.xyz/:path*',
-                permanent: true,
-            },
-        ];
-    },
     async headers() {
         return [
             {
