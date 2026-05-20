@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { db, storage } from '@/lib/firebase';
 import { doc, updateDoc } from 'firebase/firestore';
@@ -9,7 +10,8 @@ import { Camera, ShieldCheck, Clock, Lock, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 export default function ProfilePage() {
-  const { user, mentoraUser } = useAuth();
+  const { user, mentoraUser, loading: authLoading } = useAuth();
+  const router = useRouter();
   
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
@@ -23,7 +25,22 @@ export default function ProfilePage() {
   const [schoolType, setSchoolType] = useState(mentoraUser?.schoolType || 'Public');
   const [region, setRegion] = useState(mentoraUser?.region || '');
 
-  if (!user || !mentoraUser) return null;
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.push('/login');
+    }
+  }, [authLoading, user, router]);
+
+  if (authLoading || !user || !mentoraUser) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="w-10 h-10 border-4 border-slate-200 border-t-fuchsia-600 rounded-full animate-spin mx-auto" />
+          <p className="text-slate-500 text-sm">Loading profile...</p>
+        </div>
+      </div>
+    );
+  }
 
   const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
