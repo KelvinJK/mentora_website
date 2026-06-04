@@ -21,7 +21,7 @@ export default function TryForFreeButton() {
   const handleButtonClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (hasConsented) {
-      window.location.href = "https://mentoraapp.xyz/";
+      window.location.href = "https://app.mentoratanzania.co.tz/";
     } else {
       setIsModalOpen(true);
     }
@@ -32,7 +32,7 @@ export default function TryForFreeButton() {
       localStorage.setItem("mentoraAppConsent", "true");
       setHasConsented(true);
       setIsModalOpen(false);
-      window.location.href = "https://mentoraapp.xyz/";
+      window.location.href = "https://app.mentoratanzania.co.tz/";
     }
   };
 

@@ -47,7 +47,7 @@ export default function BillingPage() {
       <div className="max-w-6xl mx-auto space-y-12">
         <header className="text-center space-y-4 relative pt-12 md:pt-0">
           {hasAccess ? (
-            <a href="https://mentoraapp.xyz/" className="absolute left-0 top-0 md:flex flex items-center justify-center w-full md:w-auto gap-2 text-fuchsia-600 hover:text-fuchsia-700 transition-colors bg-white px-4 py-2 border border-fuchsia-200 rounded-xl font-medium shadow-sm">
+            <a href="https://app.mentoratanzania.co.tz/" className="absolute left-0 top-0 md:flex flex items-center justify-center w-full md:w-auto gap-2 text-fuchsia-600 hover:text-fuchsia-700 transition-colors bg-white px-4 py-2 border border-fuchsia-200 rounded-xl font-medium shadow-sm">
               <ArrowLeft className="w-4 h-4" /> Back to Mentora
             </a>
           ) : (
