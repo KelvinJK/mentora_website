@@ -45,7 +45,7 @@ export default function Navbar() {
                                 <span>Account</span>
                             </Link>
                         ) : (
-                            <Link href="/login" className="text-slate-600 hover:text-fuchsia-600 transition-colors font-medium">Sign In</Link>
+                            <a href="https://app.mentoratanzania.co.tz/login" className="text-slate-600 hover:text-fuchsia-600 transition-colors font-medium">Sign In</a>
                         )}
                         <Link href="#contact" className="px-6 py-2.5 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-600 text-white font-medium hover:shadow-glow transition-all transform hover:-translate-y-0.5">
                             Partner With Us
@@ -80,7 +80,7 @@ export default function Navbar() {
                             My Account
                         </Link>
                     ) : (
-                        <Link href="/login" className="text-slate-600 font-medium p-2 block" onClick={() => setIsOpen(false)}>Sign In</Link>
+                        <a href="https://app.mentoratanzania.co.tz/login" className="text-slate-600 font-medium p-2 block" onClick={() => setIsOpen(false)}>Sign In</a>
                     )}
                     <Link href="#contact" className="text-fuchsia-600 font-bold p-2 block" onClick={() => setIsOpen(false)}>Partner With Us</Link>
                 </div>
