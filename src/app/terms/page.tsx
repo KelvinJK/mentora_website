@@ -20,7 +20,7 @@ export default function TermsOfService() {
                     <p className="mb-3">For purposes of this Agreement:</p>
                     <ul className="list-disc pl-6 mb-6 space-y-2">
                         <li><strong>&quot;Company&quot;</strong> means Evolucion Technologies Company Limited, a company duly incorporated under the laws of the United Republic of Tanzania.</li>
-                        <li><strong>&quot;Platform&quot;</strong> means the Mentora Tanzania web-based and digital systems accessible via <a href="https://mentoratanzania.com" className="text-fuchsia-600 hover:underline">https://mentoratanzania.com</a> including all associated applications, AI tools, dashboards, APIs, and services.</li>
+                        <li><strong>&quot;Platform&quot;</strong> means the Mentora Tanzania web-based and digital systems accessible via <a href="https://www.mentoratanzania.co.tz" className="text-fuchsia-600 hover:underline">https://www.mentoratanzania.co.tz</a> including all associated applications, AI tools, dashboards, APIs, and services.</li>
                         <li><strong>&quot;User&quot;</strong> means any individual accessing the Platform including teachers, administrators, students, parents, or institutional representatives.</li>
                         <li><strong>&quot;Institution&quot;</strong> means any school, education authority, organization, or entity subscribing to Mentora services.</li>
                         <li><strong>&quot;Personal Data&quot;</strong> has the meaning assigned under the Personal Data Protection Act, 2022.</li>

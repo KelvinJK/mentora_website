@@ -10,7 +10,7 @@ export default function BillingPage() {
   
   // Replace these with actual Snippe Payment Links from your Snippe dashboard
   // Use Snippe parameters (e.g., ?client_reference_id=) to pass the user ID so the webhook knows who paid.
-  const WEBHOOK_URL = encodeURIComponent('https://mentoratanzania.com/api/webhooks/snippe');
+  const WEBHOOK_URL = encodeURIComponent('https://www.mentoratanzania.co.tz/api/webhooks/snippe');
   
   const SNIPPE_LINKS = {
     basic: `https://snippe.me/pay/mentora-basic-plan?metadata[uid]=${user?.uid}&metadata[plan]=basic&webhook_url=${WEBHOOK_URL}`,
