@@ -1,24 +1,35 @@
 import * as admin from 'firebase-admin';
 
-export function getAdminDb() {
-  if (!admin.apps.length) {
+let initialized = false;
+let initFailed = false;
+
+export function getAdminDb(): admin.firestore.Firestore | null {
+  if (initFailed) return null;
+
+  if (!initialized) {
+    const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
+    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+    const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+
+    if (!projectId || !clientEmail || !privateKey) {
+      console.warn('Firebase Admin: missing env vars (FIREBASE_CLIENT_EMAIL or FIREBASE_PRIVATE_KEY). Webhook will not work.');
+      initFailed = true;
+      return null;
+    }
+
     try {
-      if (!process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID) {
-        console.warn('Firebase env variables missing. Skipping Admin init.');
-        // Return a dummy object so builds don't crash when evaluating
-        return null as unknown as admin.firestore.Firestore;
+      if (!admin.apps.length) {
+        admin.initializeApp({
+          credential: admin.credential.cert({ projectId, clientEmail, privateKey }),
+        });
       }
-      admin.initializeApp({
-        credential: admin.credential.cert({
-          projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-          clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-          // Handle newline characters in private key
-          privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-        }),
-      });
+      initialized = true;
     } catch (error: any) {
-      console.error('Firebase Admin Initialization Error:', error.stack);
+      console.error('Firebase Admin init failed:', error.message);
+      initFailed = true;
+      return null;
     }
   }
+
   return admin.firestore();
 }

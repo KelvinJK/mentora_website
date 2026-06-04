@@ -70,9 +70,11 @@ export async function POST(req: Request) {
       if (planCode === 'pro') tier = 'pro';
       if (planCode === 'premium') tier = 'premium';
 
-      // Set expiration to 30 days from now
+      // Set expiration based on plan duration
       const expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 30);
+      if (tier === 'basic') expirationDate.setDate(expirationDate.getDate() + 30);
+      if (tier === 'pro') expirationDate.setDate(expirationDate.getDate() + 90);
+      if (tier === 'premium') expirationDate.setFullYear(expirationDate.getFullYear() + 1);
 
       const adminDb = getAdminDb();
       if (!adminDb) {

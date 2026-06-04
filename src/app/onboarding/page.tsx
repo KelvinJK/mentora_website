@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { db } from '@/lib/firebase';
 import { doc, updateDoc } from 'firebase/firestore';
@@ -23,7 +23,7 @@ export default function OnboardingPage() {
     if (user === null) {
       router.push('/login');
     }
-    // If they already did onboarding (have a schoolName), kick them to billing
+    // If they already did onboarding (have a schoolName), send them to billing
     if (mentoraUser && mentoraUser.schoolName) {
       router.push('/billing');
     }
@@ -45,8 +45,8 @@ export default function OnboardingPage() {
         region,
       });
 
-      // Redirect to billing to show their newly granted trial status
-      router.push('/billing');
+      const idToken = await user.getIdToken();
+      window.location.href = `https://app.mentoratanzania.co.tz?token=${idToken}`;
     } catch (err: any) {
       setError(err.message || 'Failed to save details. Please try again.');
       setLoading(false);

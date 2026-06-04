@@ -1,17 +1,19 @@
 'use client';
 
+import React, { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Check, ArrowLeft, Clock, Lock, ShieldCheck } from 'lucide-react';
+import { Check, ArrowLeft, Clock, Lock, ShieldCheck, Loader2 } from 'lucide-react';
 import { checkAccess } from '@/lib/userUtils';
 
 export default function BillingPage() {
-  const { user, mentoraUser } = useAuth();
-  
-  // Replace these with actual Snippe Payment Links from your Snippe dashboard
-  // Use Snippe parameters (e.g., ?client_reference_id=) to pass the user ID so the webhook knows who paid.
+  const { user, mentoraUser, loading: authLoading } = useAuth();
+  const router = useRouter();
+  const [redirectingToApp, setRedirectingToApp] = useState(false);
+
   const WEBHOOK_URL = encodeURIComponent('https://www.mentoratanzania.co.tz/api/webhooks/snippe');
-  
+
   const SNIPPE_LINKS = {
     basic: `https://snippe.me/pay/mentora-basic-plan?metadata[uid]=${user?.uid}&metadata[plan]=basic&webhook_url=${WEBHOOK_URL}`,
     pro: `https://snippe.me/pay/mentora-pro-plan?metadata[uid]=${user?.uid}&metadata[plan]=pro&webhook_url=${WEBHOOK_URL}`,
@@ -22,6 +24,35 @@ export default function BillingPage() {
     if (!user) return '/login';
     return SNIPPE_LINKS[tier];
   };
+
+  const handleGoToApp = async () => {
+    if (!user) return;
+    setRedirectingToApp(true);
+    try {
+      const idToken = await user.getIdToken();
+      window.location.href = `https://app.mentoratanzania.co.tz?token=${idToken}`;
+    } catch {
+      setRedirectingToApp(false);
+    }
+  };
+
+  // Show spinner while Firebase resolves auth state
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <Loader2 className="w-10 h-10 animate-spin text-fuchsia-600 mx-auto" />
+          <p className="text-slate-500 text-sm">Loading your account...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Redirect unauthenticated users to login
+  if (!user) {
+    router.push('/login');
+    return null;
+  }
 
   const hasAccess = checkAccess(mentoraUser);
 
@@ -47,21 +78,30 @@ export default function BillingPage() {
       <div className="max-w-6xl mx-auto space-y-12">
         <header className="text-center space-y-4 relative pt-12 md:pt-0">
           {hasAccess ? (
-            <a href="https://app.mentoratanzania.co.tz/" className="absolute left-0 top-0 md:flex flex items-center justify-center w-full md:w-auto gap-2 text-fuchsia-600 hover:text-fuchsia-700 transition-colors bg-white px-4 py-2 border border-fuchsia-200 rounded-xl font-medium shadow-sm">
-              <ArrowLeft className="w-4 h-4" /> Back to Mentora
-            </a>
+            <button
+              onClick={handleGoToApp}
+              disabled={redirectingToApp}
+              className="absolute left-0 top-0 md:flex flex items-center justify-center w-full md:w-auto gap-2 text-fuchsia-600 hover:text-fuchsia-700 transition-colors bg-white px-4 py-2 border border-fuchsia-200 rounded-xl font-medium shadow-sm disabled:opacity-60"
+            >
+              {redirectingToApp ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <ArrowLeft className="w-4 h-4" />
+              )}
+              {redirectingToApp ? 'Opening Mentora...' : 'Back to Mentora'}
+            </button>
           ) : (
             <div className="absolute left-0 top-0 md:flex flex items-center justify-center w-full md:w-auto gap-2 text-slate-400 bg-slate-100 px-4 py-2 border border-slate-200 rounded-xl font-medium cursor-not-allowed">
               <Lock className="w-4 h-4" /> App Access Locked (Upgrade Required)
             </div>
           )}
-          
+
           <h1 className="text-4xl font-bold text-slate-900 font-display mt-10 md:mt-0">Account & Billing</h1>
-          
+
           {/* Dynamic Status Banner */}
           <div className="max-w-xl mx-auto flex flex-col items-center gap-2 mt-4 p-4 rounded-xl shadow-sm border bg-white">
             <h2 className="text-sm font-bold tracking-wider text-slate-500 uppercase">Current Package Status</h2>
-            
+
             {!mentoraUser ? (
               <div className="text-slate-600">Loading your profile...</div>
             ) : mentoraUser.tier === 'trial' ? (
@@ -75,19 +115,19 @@ export default function BillingPage() {
                 </div>
               )
             ) : (
-               <div className="flex flex-col items-center">
-                 <div className="flex items-center gap-2 text-emerald-600 font-semibold bg-emerald-50 px-4 py-2 rounded-full border border-emerald-100">
-                   <ShieldCheck className="w-5 h-5" /> Mentora {mentoraUser.tier.toUpperCase()} Tier Active
-                 </div>
-                 {subDaysLeft !== null && subDaysLeft > 0 && (
-                   <div className="text-slate-500 text-sm mt-2 font-medium">Your subscription has {subDaysLeft} days remaining.</div>
-                 )}
-                 {subDaysLeft !== null && subDaysLeft <= 0 && (
-                   <div className="text-red-500 text-sm mt-2 font-bold">Your subscription has expired! Please renew below.</div>
-                 )}
-               </div>
+              <div className="flex flex-col items-center">
+                <div className="flex items-center gap-2 text-emerald-600 font-semibold bg-emerald-50 px-4 py-2 rounded-full border border-emerald-100">
+                  <ShieldCheck className="w-5 h-5" /> Mentora {mentoraUser.tier.toUpperCase()} Tier Active
+                </div>
+                {subDaysLeft !== null && subDaysLeft > 0 && (
+                  <div className="text-slate-500 text-sm mt-2 font-medium">Your subscription has {subDaysLeft} days remaining.</div>
+                )}
+                {subDaysLeft !== null && subDaysLeft <= 0 && (
+                  <div className="text-red-500 text-sm mt-2 font-bold">Your subscription has expired! Please renew below.</div>
+                )}
+              </div>
             )}
-            
+
             <p className="text-slate-500 text-sm mt-2 text-center">
               Choose an upgraded tier below to unlock full access to all curriculum tools, unlimited lesson planning, and student analytics.
             </p>
@@ -113,7 +153,7 @@ export default function BillingPage() {
                 </li>
               ))}
             </ul>
-            <a 
+            <a
               href={getCheckoutLink('basic')}
               className="block w-full py-3 px-4 text-center border-2 border-slate-200 text-slate-700 hover:border-slate-800 hover:bg-slate-800 hover:text-white rounded-xl font-medium transition-all"
             >
@@ -142,7 +182,7 @@ export default function BillingPage() {
                 </li>
               ))}
             </ul>
-            <a 
+            <a
               href={getCheckoutLink('pro')}
               className="block w-full py-3 px-4 text-center bg-gradient-to-r from-fuchsia-600 to-violet-600 hover:from-fuchsia-700 hover:to-violet-700 text-white rounded-xl font-medium shadow-md shadow-fuchsia-500/20 transition-all"
             >
@@ -168,13 +208,17 @@ export default function BillingPage() {
                 </li>
               ))}
             </ul>
-            <a 
+            <a
               href={getCheckoutLink('premium')}
               className="block w-full py-3 px-4 text-center border-2 border-slate-200 text-slate-700 hover:border-slate-800 hover:bg-slate-800 hover:text-white rounded-xl font-medium transition-all"
             >
               Select Premium
             </a>
           </div>
+        </div>
+
+        <div className="text-center text-sm text-slate-500 pb-8">
+          <Link href="/" className="hover:text-fuchsia-600 transition-colors">← Back to home</Link>
         </div>
       </div>
     </div>
