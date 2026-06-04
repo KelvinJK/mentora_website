@@ -1,5 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    async redirects() {
+        return [
+            {
+                source: '/:path*',
+                has: [{ type: 'host', value: 'mentoratanzania.com' }],
+                destination: 'https://www.mentoratanzania.co.tz/:path*',
+                permanent: true,
+            },
+            {
+                source: '/:path*',
+                has: [{ type: 'host', value: 'www.mentoratanzania.com' }],
+                destination: 'https://www.mentoratanzania.co.tz/:path*',
+                permanent: true,
+            },
+        ];
+    },
     async headers() {
         return [
             {

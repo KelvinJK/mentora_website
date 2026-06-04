@@ -25,13 +25,13 @@ export const metadata: Metadata = {
   creator: "Mentora",
   publisher: "Mentora Tanzania",
   icons: {
-    icon: "https://app.mentoratanzania.co.tz/favicon.ico",
-    apple: "https://app.mentoratanzania.co.tz/logo192.png",
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   openGraph: {
     title: "Mentora Tanzania | Empower Teaching with Intelligence",
     description: "Transforming education in Tanzania through AI-driven lesson plans, interactive learning, and teacher empowerment.",
-    url: "https://app.mentoratanzania.co.tz",
+    url: "https://www.mentoratanzania.co.tz",
     siteName: "Mentora",
     locale: "en_TZ",
     type: "website",
