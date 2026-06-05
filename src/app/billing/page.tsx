@@ -54,6 +54,12 @@ export default function BillingPage() {
     return null;
   }
 
+  // If user exists but no Firestore profile yet, send to onboarding
+  if (!mentoraUser) {
+    router.push('/onboarding');
+    return null;
+  }
+
   const hasAccess = checkAccess(mentoraUser);
 
   // Calculate Trial Remaining
@@ -102,9 +108,7 @@ export default function BillingPage() {
           <div className="max-w-xl mx-auto flex flex-col items-center gap-2 mt-4 p-4 rounded-xl shadow-sm border bg-white">
             <h2 className="text-sm font-bold tracking-wider text-slate-500 uppercase">Current Package Status</h2>
 
-            {!mentoraUser ? (
-              <div className="text-slate-600">Loading your profile...</div>
-            ) : mentoraUser.tier === 'trial' ? (
+            {mentoraUser.tier === 'trial' ? (
               trialDaysLeft !== null && trialDaysLeft > 0 ? (
                 <div className="flex items-center gap-2 text-fuchsia-600 font-semibold bg-fuchsia-50 px-4 py-2 rounded-full border border-fuchsia-100">
                   <Clock className="w-5 h-5" /> 14-Day Free Trial Active ({trialDaysLeft} days remaining)

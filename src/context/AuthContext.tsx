@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/lib/firebase';
 import { MentoraUser } from '@/types';
+import { initializeUserRecord } from '@/lib/userUtils';
 import { doc, onSnapshot } from 'firebase/firestore';
 
 interface AuthContextType {
@@ -38,10 +39,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               trialStartDate: data.trialStartDate?.toDate ? data.trialStartDate.toDate() : data.trialStartDate,
               subscriptionExpiresAt: data.subscriptionExpiresAt?.toDate ? data.subscriptionExpiresAt.toDate() : data.subscriptionExpiresAt,
             });
+            setLoading(false);
           } else {
-            setMentoraUser(null);
+            // User authenticated but no Firestore document — create it with a trial
+            initializeUserRecord(currentUser).then((newUser) => {
+              setMentoraUser(newUser);
+              setLoading(false);
+            }).catch(() => {
+              setMentoraUser(null);
+              setLoading(false);
+            });
           }
-          setLoading(false);
         });
         
         return () => unsubscribeDoc();
