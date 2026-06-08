@@ -31,26 +31,35 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (currentUser) {
         // Subscribe to MentoraUser document in Firestore to catch tier upgrades instantly
         const userRef = doc(db, 'users', currentUser.uid);
-        const unsubscribeDoc = onSnapshot(userRef, (docSnap) => {
-          if (docSnap.exists()) {
-            const data = docSnap.data() as MentoraUser;
-            setMentoraUser({
-              ...data,
-              trialStartDate: data.trialStartDate?.toDate ? data.trialStartDate.toDate() : data.trialStartDate,
-              subscriptionExpiresAt: data.subscriptionExpiresAt?.toDate ? data.subscriptionExpiresAt.toDate() : data.subscriptionExpiresAt,
-            });
+        const unsubscribeDoc = onSnapshot(
+          userRef,
+          (docSnap) => {
+            if (docSnap.exists()) {
+              const data = docSnap.data() as MentoraUser;
+              setMentoraUser({
+                ...data,
+                trialStartDate: data.trialStartDate?.toDate ? data.trialStartDate.toDate() : data.trialStartDate,
+                subscriptionExpiresAt: data.subscriptionExpiresAt?.toDate ? data.subscriptionExpiresAt.toDate() : data.subscriptionExpiresAt,
+              });
+              setLoading(false);
+            } else {
+              // User authenticated but no Firestore document — create it with a trial
+              initializeUserRecord(currentUser).then((newUser) => {
+                setMentoraUser(newUser);
+                setLoading(false);
+              }).catch(() => {
+                setMentoraUser(null);
+                setLoading(false);
+              });
+            }
+          },
+          (error) => {
+            // Firestore read failed (permissions, network, etc.) — don't hang forever
+            console.error('Firestore snapshot error:', error);
+            setMentoraUser(null);
             setLoading(false);
-          } else {
-            // User authenticated but no Firestore document — create it with a trial
-            initializeUserRecord(currentUser).then((newUser) => {
-              setMentoraUser(newUser);
-              setLoading(false);
-            }).catch(() => {
-              setMentoraUser(null);
-              setLoading(false);
-            });
           }
-        });
+        );
         
         return () => unsubscribeDoc();
       } else {

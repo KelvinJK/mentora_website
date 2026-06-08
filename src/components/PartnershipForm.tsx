@@ -20,16 +20,12 @@ export default function PartnershipForm() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [error, setError] = useState('');
 
     const onSubmit = async (data: FormData) => {
         setIsSubmitting(true);
+        setError('');
 
-        // Show success instantly — great UX, email sends in background
-        setSuccess(true);
-        reset();
-        setIsSubmitting(false);
-
-        // Fire EmailJS in background (non-blocking)
         try {
             await Promise.race([
                 emailjs.send(SERVICE_ID, TEMPLATE_ID, {
@@ -39,15 +35,17 @@ export default function PartnershipForm() {
                     partnership_area: data.partnershipArea,
                     goals: data.goals,
                 }, PUBLIC_KEY),
-                // 10-second timeout failsafe
                 new Promise((_, reject) =>
-                    setTimeout(() => reject(new Error('EmailJS timeout')), 10000)
+                    setTimeout(() => reject(new Error('Request timed out')), 15000)
                 )
             ]);
-            console.log('Email sent successfully');
-        } catch (err) {
-            // Email failed silently — user already sees success, form data still captured
-            console.error('EmailJS error (non-blocking):', err);
+            setSuccess(true);
+            reset();
+        } catch (err: any) {
+            console.error('EmailJS error:', err);
+            setError('Failed to send your request. Please email us directly at mentoratanzania@gmail.com');
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -128,6 +126,12 @@ export default function PartnershipForm() {
                 <Send size={18} />
                 {isSubmitting ? 'Sending...' : 'SUBMIT PARTNERSHIP REQUEST'}
             </button>
+
+            {error && (
+                <p className="text-red-600 text-sm text-center bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+                    {error}
+                </p>
+            )}
         </form>
     );
 }
