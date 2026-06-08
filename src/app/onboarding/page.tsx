@@ -16,11 +16,11 @@ const TANZANIA_REGIONS = [
 ];
 
 const GRADE_LEVELS = [
-  'Standard 1', 'Standard 2', 'Standard 3', 'Standard 4',
-  'Standard 5', 'Standard 6', 'Standard 7',
-  'Form 1', 'Form 2', 'Form 3', 'Form 4',
-  'Form 5', 'Form 6',
-  'All Levels',
+  'Pre-Primary',
+  'Standard I', 'Standard II', 'Standard III', 'Standard IV',
+  'Standard V', 'Standard VI', 'Standard VII',
+  'Form I', 'Form II', 'Form III', 'Form IV', 'Form V', 'Form VI',
+  'Multiple Levels',
 ];
 
 export default function OnboardingPage() {
