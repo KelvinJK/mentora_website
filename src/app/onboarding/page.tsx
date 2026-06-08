@@ -6,6 +6,23 @@ import { db } from '@/lib/firebase';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 
+const TANZANIA_REGIONS = [
+  'Arusha', 'Dar es Salaam', 'Dodoma', 'Geita', 'Iringa', 'Kagera',
+  'Katavi', 'Kigoma', 'Kilimanjaro', 'Lindi', 'Manyara', 'Mara',
+  'Mbeya', 'Morogoro', 'Mtwara', 'Mwanza', 'Njombe', 'Pemba North',
+  'Pemba South', 'Pwani', 'Rukwa', 'Ruvuma', 'Shinyanga', 'Simiyu',
+  'Singida', 'Songwe', 'Tabora', 'Tanga', 'Unguja North', 'Unguja South',
+  'Zanzibar West',
+];
+
+const GRADE_LEVELS = [
+  'Standard 1', 'Standard 2', 'Standard 3', 'Standard 4',
+  'Standard 5', 'Standard 6', 'Standard 7',
+  'Form 1', 'Form 2', 'Form 3', 'Form 4',
+  'Form 5', 'Form 6',
+  'All Levels',
+];
+
 export default function OnboardingPage() {
   const { user, mentoraUser } = useAuth();
   const router = useRouter();
@@ -14,16 +31,14 @@ export default function OnboardingPage() {
   const [gradeTaught, setGradeTaught] = useState('');
   const [schoolType, setSchoolType] = useState('Public');
   const [region, setRegion] = useState('');
-  
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // If user is not logged in at all, kick them to login
   useEffect(() => {
     if (user === null) {
       router.push('/login');
     }
-    // If they already did onboarding (have a schoolName), send them to billing
     if (mentoraUser && mentoraUser.schoolName) {
       router.push('/billing');
     }
@@ -53,12 +68,13 @@ export default function OnboardingPage() {
     }
   };
 
-  if (!user) return null; // Prevent flicker
+  if (!user) return null;
+
+  const selectClass = "w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-fuchsia-600 focus:border-transparent outline-none transition-all bg-white text-slate-700 appearance-none cursor-pointer";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4 py-12">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 border border-slate-100 relative overflow-hidden">
-        {/* Progress Bar Aesthetic */}
         <div className="absolute top-0 left-0 w-full h-1 bg-slate-100">
           <div className="h-full bg-fuchsia-500 w-1/2"></div>
         </div>
@@ -89,40 +105,67 @@ export default function OnboardingPage() {
 
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Region / Location</label>
-            <input
-              type="text"
-              required
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-fuchsia-600 focus:border-transparent outline-none transition-all"
-              value={region}
-              onChange={(e) => setRegion(e.target.value)}
-              placeholder="e.g. Dar es Salaam"
-            />
+            <div className="relative">
+              <select
+                required
+                className={selectClass}
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
+              >
+                <option value="" disabled>Select your region</option>
+                {TANZANIA_REGIONS.map((r) => (
+                  <option key={r} value={r}>{r}</option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">Grade Taught</label>
-              <input
-                type="text"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-fuchsia-600 focus:border-transparent outline-none transition-all"
-                value={gradeTaught}
-                onChange={(e) => setGradeTaught(e.target.value)}
-                placeholder="e.g. Form 4"
-              />
+              <div className="relative">
+                <select
+                  required
+                  className={selectClass}
+                  value={gradeTaught}
+                  onChange={(e) => setGradeTaught(e.target.value)}
+                >
+                  <option value="" disabled>Select grade</option>
+                  {GRADE_LEVELS.map((g) => (
+                    <option key={g} value={g}>{g}</option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                  <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">School Type</label>
-              <select
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-fuchsia-600 focus:border-transparent outline-none transition-all bg-white"
-                value={schoolType}
-                onChange={(e) => setSchoolType(e.target.value as "Public" | "Private" | "International")}
-              >
-                <option value="Public">Public</option>
-                <option value="Private">Private</option>
-                <option value="International">International</option>
-              </select>
+              <div className="relative">
+                <select
+                  className={selectClass}
+                  value={schoolType}
+                  onChange={(e) => setSchoolType(e.target.value)}
+                >
+                  <option value="Public">Public</option>
+                  <option value="Private">Private</option>
+                  <option value="International">International</option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                  <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
 
