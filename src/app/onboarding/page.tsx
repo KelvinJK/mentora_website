@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { db } from '@/lib/firebase';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 
 const TANZANIA_REGIONS = [
@@ -53,12 +53,12 @@ export default function OnboardingPage() {
 
     try {
       const userRef = doc(db, 'users', user.uid);
-      await updateDoc(userRef, {
+      await setDoc(userRef, {
         schoolName,
         gradeTaught,
         schoolType,
         region,
-      });
+      }, { merge: true });
 
       const idToken = await user.getIdToken();
       window.location.href = `https://app.mentoratanzania.co.tz?token=${idToken}`;
