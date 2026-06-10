@@ -23,9 +23,9 @@ const MOCK_TEAM: TeamMember[] = [
     },
     {
         id: '3',
-        name: 'Emmanuel Silayo',
+        name: 'Casto Malimali',
         role: 'Head of Engineering',
-        imageUrl: '/images/team/emmanuel.jpg?v=updated',
+        imageUrl: '/images/team/casto.jpg',
         bio: 'Oversees the development lifecycle, ensuring the platform architecture is robust, scalable, and secure.',
     },
     {
