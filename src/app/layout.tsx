@@ -4,6 +4,7 @@ import "./globals.css";
 import { CSPostHogProvider } from "./providers";
 import CookieBanner from "@/components/CookieBanner";
 import { AuthProvider } from "@/context/AuthContext";
+import { Analytics } from "@vercel/analytics/next";
 
 const firaSans = Fira_Sans({
   subsets: ["latin"],
@@ -247,6 +248,7 @@ export default function RootLayout({
             <CookieBanner />
           </AuthProvider>
         </CSPostHogProvider>
+        <Analytics />
       </body>
     </html>
   );
