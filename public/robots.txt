@@ -1,3 +1,41 @@
+# ============================================================
+# Mentora Tanzania — https://www.mentoratanzania.co.tz
+# Tanzania's #1 AI Teaching Platform for the CBC Curriculum
+# ============================================================
+
 User-agent: *
 Allow: /
+
+# Block private/account pages from indexing
+Disallow: /profile
+Disallow: /billing
+Disallow: /onboarding
+Disallow: /api/
+
+# Allow major AI crawlers explicitly
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap location
 Sitemap: https://www.mentoratanzania.co.tz/sitemap.xml
