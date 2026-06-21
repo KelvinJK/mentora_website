@@ -1,9 +1,10 @@
-import * as admin from 'firebase-admin';
+import { initializeApp, getApps, cert } from 'firebase-admin/app';
+import { Firestore, getFirestore } from 'firebase-admin/firestore';
 
 let initialized = false;
 let initFailed = false;
 
-export function getAdminDb(): admin.firestore.Firestore | null {
+export function getAdminDb(): Firestore | null {
   if (initFailed) return null;
 
   if (!initialized) {
@@ -18,9 +19,9 @@ export function getAdminDb(): admin.firestore.Firestore | null {
     }
 
     try {
-      if (!admin.apps.length) {
-        admin.initializeApp({
-          credential: admin.credential.cert({ projectId, clientEmail, privateKey }),
+      if (getApps().length === 0) {
+        initializeApp({
+          credential: cert({ projectId, clientEmail, privateKey }),
         });
       }
       initialized = true;
@@ -31,5 +32,5 @@ export function getAdminDb(): admin.firestore.Firestore | null {
     }
   }
 
-  return admin.firestore();
+  return getFirestore();
 }
