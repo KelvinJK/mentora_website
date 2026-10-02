@@ -44,9 +44,9 @@ const MOCK_TEAM: TeamMember[] = [
     },
     {
         id: '6',
-        name: 'Christina Haule',
+        name: 'Elizabeth Milaho',
         role: 'Communications & Community Lead',
-        imageUrl: '/images/team/christina.jpg',
+        imageUrl: '/images/team/elizabeth.jpg',
         bio: 'Brand, Teacher Engagement & Adoption. Builds Mentora’s public presence and teacher loyalty.',
     },
 ];
